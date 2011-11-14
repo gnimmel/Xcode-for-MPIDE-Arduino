@@ -1,5 +1,5 @@
 #
-# Arduino makefile
+# Xcode Makefile for MPIDE Arduino
 # Arduino version
 #
 #

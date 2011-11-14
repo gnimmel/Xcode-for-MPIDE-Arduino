@@ -1,0 +1,10 @@
+References
+---
+
+svofski
+http://www.chipkit.org/forum/viewtopic.php?p=1285#p1285
+http://pastebin.com/31XXwmUV
+
+borealkiss
+A minimal project template for Xcode 4
+http://blog.boreal-kiss.net/2011/03/11/a-minimal-project-template-for-xcode-4/
