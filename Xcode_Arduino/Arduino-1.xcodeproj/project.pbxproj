@@ -8,8 +8,12 @@
 
 /* Begin PBXFileReference section */
 		01706F590A347F9A00E43B08 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.make; };
-		F0084DE50D2E4A6C00BCB246 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; tabWidth = 4; usesTabs = 1; };
-		F0084DFC0D2E4C7E00BCB246 /* SoftwareSerial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoftwareSerial.cpp; sourceTree = "<group>"; };
+		271393CD14718F3F00198BA4 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		271393CE14718F7500198BA4 /* LED.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LED.cpp; sourceTree = "<group>"; };
+		271393CF14718F7500198BA4 /* LED.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LED.h; sourceTree = "<group>"; };
+		271393D014718F7500198BA4 /* SoftwareSerial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoftwareSerial.cpp; sourceTree = "<group>"; };
+		271393D114718F7500198BA4 /* SoftwareSerial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftwareSerial.h; sourceTree = "<group>"; };
+		2713A17F1471993D00E95530 /* Documentation.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Documentation.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -27,8 +31,11 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				F0084DE50D2E4A6C00BCB246 /* main.cpp */,
-				F0084DFC0D2E4C7E00BCB246 /* SoftwareSerial.cpp */,
+				271393CD14718F3F00198BA4 /* main.cpp */,
+				271393CE14718F7500198BA4 /* LED.cpp */,
+				271393CF14718F7500198BA4 /* LED.h */,
+				271393D014718F7500198BA4 /* SoftwareSerial.cpp */,
+				271393D114718F7500198BA4 /* SoftwareSerial.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -43,6 +50,7 @@
 		C6A0FF2B0290797F04C91782 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
+				2713A17F1471993D00E95530 /* Documentation.txt */,
 			);
 			name = Documentation;
 			sourceTree = "<group>";
