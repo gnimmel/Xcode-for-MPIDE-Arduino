@@ -1,75 +1,88 @@
-#
 # Arduino makefile
-# Arduino version
 #
+# This makefile allows you to build sketches from the command line
+# without the Arduino environment (or Java).
 #
-# 2011-11-01 release 1 - initial release for Arduino only
-# 2011-11-04 release 2 - for Arduino and chipKIT
-# 2011-11-14 release 3 - #include libraries compiled and linked
+# The Arduino environment does preliminary processing on a sketch before
+# compiling it.  If you're using this makefile instead, you'll need to do
+# a few things differently:
 #
+#   - Give your program's file a .cpp extension (e.g. foo.cpp).
 #
-# CC = BY NC SA
-# http://sites.google.com/site/vilorei/
+#   - Put this line at top of your code: #include <WProgram.h>
 #
-# MPIDE 0022
-# Xcode 4.2 on Mac OS X 7.2
+#   - Write prototypes for all your functions (or define them before you
+#     call them).  A prototype declares the types of parameters a
+#     function will take and what type of value it will return.  This
+#     means that you can have a call to a function before the definition
+#     of the function.  A function prototype looks like the first line of
+#     the function, with a semi-colon at the end.  For example:
+#     int digitalRead(int pin);
 #
-# Based on so many compiled contributions I can't remember! 
+#   - Write a main() function for your program that returns an int, calls
+#     init() and setup() once (in that order), and then calls loop()
+#     repeatedly():
 #
+#	int main()
+#	{
+#		init();
+#		setup();
 #
+#		for (;;)
+#			loop();
 #
+#		return 0;
+#	}
+#
+# Instructions for using the makefile:
+#
+#  1. Copy this file into the folder with your sketch.
+#
+#  2. Below, modify the line containing "TARGET" to refer to the name of
+#     of your program's file without an extension (e.g. TARGET = foo).
+#
+#  3. Modify the line containg "ARDUINO" to point the directory that
+#     contains the Arduino core (for normal Arduino installations, this
+#     is the hardware/arduino/cores/arduino sub-directory).
+#
+#  4. Modify the line containing "PORT" to refer to the filename
+#     representing the USB or serial connection to your Arduino board
+#     (e.g. PORT = /dev/tty.USB0).  If the exact name of this file
+#     changes, you can use * as a wildcard (e.g. PORT = /dev/tty.USB*).
+#
+#  5. At the command line, change to the directory containing your
+#     program's file and the makefile.
+#
+#  6. Type "make" and press enter to compile/verify your program.
+#
+#  7. Type "make upload", reset your Arduino board, and press enter  to
+#     upload your program to the Arduino board.
+#
+# $Id$
 
-#
-# Board configuration
-#
-MCU = atmega328p # !! updated
-F_CPU = 16000000L
-FORMAT = ihex
-UPLOAD_RATE = 115200 # !! updated
-
-
-#
-# Directories
 # Update these to reflect the location of the Arduino IDE and avrdude installations, respectively
-#
 ARDUINO = /Applications/Mpide.app/Contents/Resources/Java/hardware/arduino/cores/arduino
 AVRDUDE_DIR = /Applications/Mpide.app/Contents/Resources/Java/hardware/tools/avr/bin/
 AVRDUDE_CONF = /Applications/Mpide.app/Contents/Resources/Java/hardware/tools/avr/etc/avrdude.conf
-SOURCES = $(wildcard src/*.cpp) $(wildcard *.cpp)
 
-
-#
-# Libraries
-# loading libraries - adjust to your needs
-# 
-STEPPER = $(LIBRARIES)/Stepper
-SERVO = $(LIBRARIES)/Servo
-EEPROM = $(LIBRARIES)/EEPROM
-INCLUDE_LIBRARIES = -I$(STEPPER) -I$(SERVO) -I$(EEPROM)
-CPP_LIBRARIES = $(wildcard $(STEPPER)/*.cpp) $(wildcard $(SERVO)/*.cpp) $(wildcard $(EEPROM)/*.cpp) 
-
-
-#
-# Port and ?
-#
 PORT = /dev/tty.usbmodem* # !! was PORT = /dev/tty.usbserial*
 TARGET = main
 SRC = $(ARDUINO)/pins_arduino.c $(ARDUINO)/wiring.c \
 $(ARDUINO)/wiring_analog.c $(ARDUINO)/wiring_digital.c \
 $(ARDUINO)/wiring_pulse.c \
 $(ARDUINO)/wiring_shift.c $(ARDUINO)/WInterrupts.c
-CXXSRC = $(ARDUINO)/HardwareSerial.cpp $(ARDUINO)/WMath.cpp $(ARDUINO)/WString.cpp $(ARDUINO)/Print.cpp $(CPP_LIBRARIES) $(SOURCES)
+CXXSRC = $(ARDUINO)/HardwareSerial.cpp $(ARDUINO)/WMath.cpp $(ARDUINO)/WString.cpp $(ARDUINO)/Print.cpp # !! added $(ARDUINO)/WString.cpp
+MCU = atmega328p # !! updated
+F_CPU = 16000000L
+FORMAT = ihex
+UPLOAD_RATE = 115200 # !! updated
 
-#
 # Name of this Makefile (used for "make depend").
-#
 MAKEFILE = Makefile
 
-#
 # Debugging format.
 # Native formats for AVR-GCC's -g are stabs [default], or dwarf-2.
 # AVR (extended) COFF requires stabs, plus an avr-objcopy run.
-#
 DEBUG = stabs
 
 OPT = s
@@ -103,7 +116,8 @@ LDFLAGS = -lm
 AVRDUDE_PROGRAMMER = arduino
 AVRDUDE_PORT = $(PORT)
 AVRDUDE_WRITE_FLASH = -U flash:w:$(TARGET).hex
-AVRDUDE_FLAGS = -F -p $(MCU) -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER) -C $(AVRDUDE_CONF) -b $(UPLOAD_RATE)
+AVRDUDE_FLAGS = -F -p $(MCU) -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER) \
+  -C $(AVRDUDE_CONF)  -b $(UPLOAD_RATE)
   
 
 # Program settings
