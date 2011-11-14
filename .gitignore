@@ -3,4 +3,4 @@
 *.xcuserdatad*
 *.elf
 *.hex
-*.a
+*.o
